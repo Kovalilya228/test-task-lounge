@@ -21,8 +21,8 @@ const onImgError = () => {
     imgFailed.value = true
 }
 
-const round1 = (n: number) => Math.round(n * 10) / 10
-const totalItemWeight = computed(() => round1(props.item.weight * quantity.value))
+const roundFirstDigit = (n: number) => Math.round(n * 10) / 10
+const totalItemWeight = computed(() => roundFirstDigit(props.item.weight * quantity.value))
 
 </script>
 
@@ -42,19 +42,26 @@ const totalItemWeight = computed(() => round1(props.item.weight * quantity.value
             <div class="info">
                 <div class="name">{{ item.name }}</div>
                 <div class="meta">
-                    <span class="metaRow">Вес: {{ totalItemWeight }}</span>
-                    <span class="metaSep">|</span>
-                    <span class="metaRow">Количество: {{ quantity }}</span>
+                    <span class="metaRow">
+                        <span class="metaLabel">Вес:</span>
+                        <span class="metaValue">{{ totalItemWeight }}</span>
+                    </span>
+                    <span class="metaRow">
+                        <span class="metaLabel">Количество:</span>
+                        <span class="metaValue">{{ quantity }}</span>
+                    </span>
                 </div>
             </div>
 
-            <div class="actions" v-if="quantity > 0">
-                <button class="minus" @click="decrement(item.id)">-</button>
-                <button class="plus" @click="increment(item.id)">+</button>
-                <button class="delete" @click="removeItem(item.id)">Удалить</button>
-            </div>
-            <div v-else>
-                <button class="add" @click="increment(item.id)">Добавить</button>
+            <div class="actions">
+                <template v-if="quantity > 0">
+                    <button class="minus" @click="decrement(item.id)">-</button>
+                    <button class="plus" @click="increment(item.id)">+</button>
+                    <button class="delete" @click="removeItem(item.id)">Удалить</button>
+                </template>
+                <template v-else>
+                    <button class="add" @click="increment(item.id)">Добавить</button>
+                </template>
             </div>
         </div>
         
@@ -67,6 +74,7 @@ const totalItemWeight = computed(() => round1(props.item.weight * quantity.value
     gap: 10px;
     max-width: 100%;
     @media (max-width: 430px) {
+        width: 100%;
         .image {
             max-width: 36vw;
             max-height: 150px;
@@ -92,16 +100,17 @@ const totalItemWeight = computed(() => round1(props.item.weight * quantity.value
         button {
             padding: 6px 8px;
         }
-        .meta {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            min-height: 36px;
-        }
-        .metaSep {
-            display: none;
+        .actions {
+            min-height: 44px;
         }
     }
+}
+.meta {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-height: 36px;
+    min-width: 150px;
 }
 .right {
     display: flex;
@@ -123,19 +132,29 @@ const totalItemWeight = computed(() => round1(props.item.weight * quantity.value
     border-radius: 8px;
     background: linear-gradient(135deg, rgba(0,0,0,0.04), rgba(0,0,0,0.08));
 }
-
 .meta {
     display: flex;
     align-items: baseline;
     white-space: nowrap;
 }
-.metaSep {
-    margin: 0 6px;
-    color: rgba(0, 0, 0, 0.6);
+.metaLabel {
+    margin-right: 6px;
+}
+.metaValue {
+    display: inline-block;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+.metaValueQty {
+    min-width: 2ch;
+}
+.metaValueWeight {
+    min-width: 4ch;
 }
 .actions {
     display: flex;
     gap: 10px;
+    min-height: 34px;
 }
 button {
     background-color: unset;

@@ -4,8 +4,8 @@ import { storeToRefs } from 'pinia'
 import { computed } from 'vue'
 const { totalCount, totalWeight } = storeToRefs(useInventoryStore())
 
-const round1 = (n: number) => Math.round(n * 10) / 10
-const formattedTotalWeight = computed(() => round1(totalWeight.value))
+const roundFirstDigit = (n: number) => Math.round(n * 10) / 10
+const formattedTotalWeight = computed(() => roundFirstDigit(totalWeight.value))
 </script>
 
 <template>
