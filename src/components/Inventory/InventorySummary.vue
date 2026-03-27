@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import { useInventoryStore } from '@/store/inventory'
 import { storeToRefs } from 'pinia'
+import { computed } from 'vue'
 const { totalCount, totalWeight } = storeToRefs(useInventoryStore())
+
+const round1 = (n: number) => Math.round(n * 10) / 10
+const formattedTotalWeight = computed(() => round1(totalWeight.value))
 </script>
 
 <template>
@@ -13,7 +17,7 @@ const { totalCount, totalWeight } = storeToRefs(useInventoryStore())
 
         <div class="row">
             <span>Общий вес:</span>
-            <span>{{ totalWeight }}</span>
+            <span>{{ formattedTotalWeight }}</span>
         </div>
   </div>
 </template>

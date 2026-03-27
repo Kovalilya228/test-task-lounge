@@ -10,7 +10,7 @@ export const useInventoryStore = defineStore(
                 id: '1',
                 name: 'Футболка',
                 weight: 1,
-                image: 'https://www.shutterstock.com/shutterstock/photos/2675875683/display_1500/stock-photo-black-t-shirt-short-sleeve-mockup-2675875683.jpg',
+                image: 'https://www.shutt123erstock.com/shutterstock/photos/2675875683/display_1500/stock-photo-black-t-shirt-short-sleeve-mockup-2675875683.jpg',
               },
               {
                 id: '2',
