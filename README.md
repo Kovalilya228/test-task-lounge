@@ -1,5 +1,7 @@
 # Inventory App (Vue 3 + Pinia)
 
+## Netlify link - https://sensational-puffpuff-44362c.netlify.app/
+
 Небольшое приложение для работы с инвентарём: добавление предметов, изменение количества и подсчёт общего веса.
 
 ## Стек
